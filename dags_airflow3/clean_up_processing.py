@@ -19,18 +19,21 @@ importlib.invalidate_caches()
 @dag(dag_id="clean-up-jobs", schedule="@daily", tags="clean_up")
 def clean_up_completed_jobs():
     @task.bash(output_processor=lambda output: json.loads(output))
-    #@task.bash
     def get_completed_jobs() -> str:
         return "/stackable/kubectl get pods -n stackable-products --output=json | jq -c '.items[] | select(.metadata.labels.\"app.kubernetes.io/component\" == \"spark\")'"
         #return "/stackable/kubectl get pods -n stackable-products --output=json output.json"
-    #@task.bash
     @task
-    def delete_completed_tasks(list):
-        #return f"/stackable/kubectl delete pod -n stackable-products {list}"
-        print(f"WHAT IT GOT FROM ANOTHER TASK: {json.dumps(list)}")
+    def filter_completed_spark_jobs(pods_list: list):
+        completed_pods = []
+        for pod in pods_list:
+            # Check each container in the pod
+            for container_status in pod.get('status', {}).get('containerStatuses', []):
+                if container_status.get('state', {}).get('terminated', {}).get('reason') == 'Completed':
+                    completed_pods.append(pod['metadata']['name'])
+        print(f"FILTERED JOBS: {completed_pods}")
         
     completed_tasks = get_completed_jobs()
     
-    delete_completed_tasks(completed_tasks)
+    filter_completed_spark_jobs(completed_tasks)
 
 clean_up_completed_jobs()
