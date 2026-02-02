@@ -23,7 +23,8 @@ def clean_up_completed_jobs():
 
     @task
     def delete_completed_tasks(list: [str]):
-        print(f'{list}')
+        for pod in list:
+            print(f'{pod}')
         
     completed_tasks = get_completed_jobs()
     
