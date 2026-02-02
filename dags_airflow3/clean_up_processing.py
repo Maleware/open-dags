@@ -25,12 +25,12 @@ def clean_up_completed_jobs():
         return "/stackable/kubectl get pods -n stackable-products --output=json"
     #@task.bash
     @task
-    def delete_completed_tasks(list: str):
+    def delete_completed_tasks(list):
         #return f"/stackable/kubectl delete pod -n stackable-products {list}"
-        print(f"WHAT IT GOT FROM ANOTHER TASK: {list}")
+        print(f"WHAT IT GOT FROM ANOTHER TASK: {json.dumps(list)}")
         
     completed_tasks = get_completed_jobs()
     
-    delete_completed_tasks(json.dumps(completed_tasks))
+    delete_completed_tasks(completed_tasks)
 
 clean_up_completed_jobs()
