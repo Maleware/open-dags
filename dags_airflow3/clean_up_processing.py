@@ -22,7 +22,7 @@ def clean_up_completed_jobs():
         return "/stackable/kubectl get pods -n stackable-products | grep Completed"
 
     @task
-    def delete_completed_tasks(list: str):
+    def delete_completed_tasks(list: [str]):
         print(f'{list}')
         
     completed_tasks = get_completed_jobs()
