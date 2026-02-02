@@ -27,7 +27,7 @@ def clean_up_completed_jobs():
         completed_pods = []
         for pod in pods_list:
             # Check each container in the pod
-            for container_status in pod.get('status', {}).get('containerStatuses', []):
+            for container_status in json_loads(pod).get('status', {}).get('containerStatuses', []):
                 if json.loads(container_status).get('state', {}).get('terminated', {}).get('reason') == 'Completed':
                     completed_pods.append(pod['metadata']['name'])
         print(f"FILTERED JOBS: {completed_pods}")
