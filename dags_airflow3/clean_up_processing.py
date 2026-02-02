@@ -18,7 +18,7 @@ importlib.invalidate_caches()
 @dag(dag_id="clean-up-jobs", schedule="@daily", tags="clean_up")
 def clean_up_completed_jobs():
     @task.bash
-    def get_completed_jobs() -> str:
+    def get_completed_jobs() -> [str]:
         return "/stackable/kubectl get pods -n stackable-products | grep Completed"
 
     @task
