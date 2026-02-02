@@ -21,8 +21,8 @@ def clean_up_completed_jobs():
     @task.bash(output_processor=lambda output: json.loads(output))
     #@task.bash
     def get_completed_jobs() -> str:
-        #return "/stackable/kubectl get pods -n stackable-products --output=json | jq '.items[] | select(.metadata.labels.\"app.kubernetes.io/component\" == \"spark\")'"
-        return "/stackable/kubectl get pods -n stackable-products --output=json output.json"
+        return "/stackable/kubectl get pods -n stackable-products --output=json | jq -c '.items[] | select(.metadata.labels.\"app.kubernetes.io/component\" == \"spark\")'"
+        #return "/stackable/kubectl get pods -n stackable-products --output=json output.json"
     #@task.bash
     @task
     def delete_completed_tasks(list):
