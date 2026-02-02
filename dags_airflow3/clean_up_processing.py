@@ -25,7 +25,7 @@ def clean_up_completed_jobs():
     @task
     def filter_completed_spark_jobs(pods_list: list):
         completed_pods = []
-        for pod in pods_list:
+        for pod in json.loads(pods_list):
             # Check each container in the pod
             #for container_status in json.loads(pod).get('status', {}).get('containerStatuses', []):
             #    if json.loads(container_status).get('state', {}).get('terminated', {}).get('reason') == 'Completed':
