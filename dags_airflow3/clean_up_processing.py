@@ -28,3 +28,5 @@ def clean_up_completed_jobs():
     completed_tasks = get_completed_jobs()
     
     delete_completed_tasks(completed_tasks)
+
+clean_up_completed_jobs()
