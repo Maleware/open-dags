@@ -24,8 +24,8 @@ def clean_up_completed_jobs():
         #return "/stackable/kubectl get pods -n stackable-products --output=json output.json"
     @task
     def filter_completed_spark_jobs(pods_list: list):
-        completed_pods = []
-        print(f"PODS: {pods_list[metadata]}")
+        for pod in pods_list:
+            print(f"PODS: {pods}")
         
     completed_tasks = get_completed_jobs()
     
