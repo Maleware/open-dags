@@ -31,6 +31,6 @@ def clean_up_completed_jobs():
         
     completed_tasks = get_completed_jobs()
     
-    delete_completed_tasks(json.dump(completed_tasks))
+    delete_completed_tasks(json.dumps(completed_tasks))
 
 clean_up_completed_jobs()
