@@ -27,7 +27,7 @@ def clean_up_completed_jobs():
     @task
     def delete_completed_tasks(list: str):
         #return f"/stackable/kubectl delete pod -n stackable-products {list}"
-        print(f"{list}")
+        print(f"WHAT IT GOT FROM ANOTHER TASK: {list}")
         
     completed_tasks = get_completed_jobs()
     
