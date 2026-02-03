@@ -24,7 +24,7 @@ def clean_up_completed_jobs():
         # return "/stackable/kubectl get pods -n stackable-products --output=json | jq -c '.items[] | select(.metadata.labels.\"app.kubernetes.io/component\" == \"spark\")'"
         return "/stackable/kubectl get pods -n stackable-products --output=json"
     @task
-    def filter_completed_spark_jobs(pods_list: str):
+    def filter_completed_spark_jobs(pod_list: str):
         print(f"PODS: {pod_list}")
         
     completed_tasks = get_completed_jobs()
