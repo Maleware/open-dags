@@ -12,10 +12,12 @@ print(sys.path)
 importlib.reload(site)
 importlib.invalidate_caches()
 
+TARGET_NAMESPACE="stackable-products"
+
 @dag(dag_id="clean-up-jobs", schedule="@daily", tags="clean_up")
 def clean_up_completed_jobs():
     def get_completed_jobs() -> [str]:
-        cmd = "/stackable/kubectl get pods -n stackable-products | grep Completed"
+        cmd = f"/stackable/kubectl get pods -n {TARGET_NAMESPACE} | grep Completed"
         output = subprocess.check_output(cmd, shell=True)
         print(output)
         return str(output).strip('b\'').split('\\n')
@@ -32,7 +34,7 @@ def clean_up_completed_jobs():
     def delete_jobs(pod_names: [str]):
         for name in pod_names:
             print(f"ABOUT TO DELTE {name}")
-            cmd = f"/stackable/kubectl delete pod {name} -n stackable-products"
+            cmd = f"/stackable/kubectl delete pod {name} -n {TARGET_NAMESPACE}"
             output = subprocess.check_output(cmd, shell=True)
 
     @task
