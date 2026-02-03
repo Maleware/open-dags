@@ -29,7 +29,8 @@ def clean_up_completed_jobs():
 
         grep for "Completed" only leaves lines with the podnames sperated by \\n"
         """
-        cmd = f"/stackable/kubectl get pods -n {TARGET_NAMESPACE} | grep Completed"
+        #cmd = f"/stackable/kubectl get pods -n {TARGET_NAMESPACE} | grep Completed"
+        cmd = f"/stackable/kubectl get pods -n {TARGET_NAMESPACE} -o json"
         output = subprocess.check_output(cmd, shell=True)
         json_string = json.loads(output)
         print(f"json: {json_string}")
