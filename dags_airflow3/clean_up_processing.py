@@ -28,13 +28,14 @@ def clean_up_completed_jobs():
         cmd = "/stackable/kubectl get pods -n stackable-products | grep Completed"
         output = subprocess.check_output(cmd, shell=True)
         print(output)
-        return str(output).split('\\n')
+        return str(output).strip('b\'').split('\\n')
 
     @task
     def filter_completed_spark_jobs(pod_list: [str]):
         #pods = pod_list.split("\n")
-        for pod in pod_list:
-            print(f"PODS: {pod}")
+        for pod_details in pod_list:
+            for pod_name in pod_details.split(' ')
+            print(f"PODS: {pod_name[0]}")
         
     completed_tasks = get_completed_jobs()
     
