@@ -32,11 +32,10 @@ def clean_up_completed_jobs():
 
     @task
     def filter_completed_spark_jobs(pod_list: [str]):
-        #pods = pod_list.split("\n")
+        pods = []
         for pod_details in pod_list:
-            print("NEW DETAILS:")
-            for pod_name in pod_details.split(' '):
-                print(f"PODS: {pod_name}")
+            pods.append(pod_details.split(' ')[0])
+        print(f'{pods}')
         
     completed_tasks = get_completed_jobs()
     
