@@ -4,6 +4,7 @@ from airflow.sdk import dag, task
 import subprocess
 import importlib
 import sys
+import site
 
 print(sys.path)
 
