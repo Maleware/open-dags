@@ -36,9 +36,9 @@ def clean_up_completed_jobs():
 
     def delete_completed_spark_jobs(pod_names: [str]):
         for name in pod_names:
+            print(f"ABOUT TO DELTE {name}")
             cmd = f"/stackable/kubectl delete pod {name} -n stackable-products"
             output = subprocess.run(cmd, shell=True)
-            print(f"Deleted Pod: {output}")
 
     @task
     def delete_completed_spark_jobs():
