@@ -31,8 +31,8 @@ def clean_up_completed_jobs():
         """
         cmd = f"/stackable/kubectl get pods -n {TARGET_NAMESPACE} | grep Completed"
         output = subprocess.check_output(cmd, shell=True)
-        json = json.load(output)
-        print(f"json: {json}")
+        json_string = json.load(output)
+        print(f"json: {json_string}")
         logging.debug(f"Cought pods from {TARGET_NAMESPACE}: {output}")
         # Output of subrocess contains leading b' from underlying data type.
         # Need to strip and split in lines per detected job
