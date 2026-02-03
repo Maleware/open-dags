@@ -35,7 +35,7 @@ def clean_up_completed_jobs():
         #pods = pod_list.split("\n")
         for pod_details in pod_list:
             for pod_name in pod_details.split(' '):
-                print(f"PODS: {pod_name[0]}")
+                print(f"PODS: {pod_name}")
         
     completed_tasks = get_completed_jobs()
     
