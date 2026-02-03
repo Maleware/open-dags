@@ -34,8 +34,11 @@ def clean_up_completed_jobs():
         output = subprocess.check_output(cmd, shell=True)
         json_string = json.loads(output)
         for pods in json_string["items"]:
-            if pods["state"]["terminated"]["reason"] == "Completed":
-                print(f"json: {pods}")
+            try:
+                if pods["state"]["terminated"]["reason"] == "Completed":
+                    print(f"json: {pods}")
+            except:
+                continue
         logging.debug(f"Cought pods from {TARGET_NAMESPACE}: {output}")
         # Output of subrocess contains leading b' from underlying data type.
         # Need to strip and split in lines per detected job
