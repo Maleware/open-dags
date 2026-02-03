@@ -18,14 +18,14 @@ importlib.invalidate_caches()
 
 @dag(dag_id="clean-up-jobs", schedule="@daily", tags="clean_up")
 def clean_up_completed_jobs():
-    @task.bash(output_processor=lambda output: json.load(output))
+    #@task.bash(output_processor=lambda output: json.load(output))
+    @task.bash
     def get_completed_jobs() -> str:
         # return "/stackable/kubectl get pods -n stackable-products --output=json | jq -c '.items[] | select(.metadata.labels.\"app.kubernetes.io/component\" == \"spark\")'"
         return "/stackable/kubectl get pods -n stackable-products --output=json"
     @task
-    def filter_completed_spark_jobs(pods_list: list):
-        for pod in pods_list:
-            print(f"PODS: {pod}")
+    def filter_completed_spark_jobs(pods_list: str):
+        print(f"PODS: {pod_list}")
         
     completed_tasks = get_completed_jobs()
     
