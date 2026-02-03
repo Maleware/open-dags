@@ -5,6 +5,8 @@ import logging
 import sys
 import site
 
+import json
+
 print(sys.path)
 
 # invalidate cache due to race condition when using dag-processor
