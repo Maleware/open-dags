@@ -1,15 +1,8 @@
 # k get pods -n stackable-products | grep Completed
 
-from datetime import datetime, timedelta
-from airflow.exceptions import AirflowException
 from airflow.sdk import dag, task
-from airflow.utils import yaml
-import os
-import sys
 import subprocess
 import importlib
-import site
-import json
 
 print(sys.path)
 
