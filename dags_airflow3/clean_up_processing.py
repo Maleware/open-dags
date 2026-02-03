@@ -17,7 +17,7 @@ TARGET_NAMESPACE="stackable-products"
 def clean_up_completed_jobs():
     def get_completed_jobs() -> [str]:
         """
-        Output of kubectl get pods | grep Completed looks something like
+        Output of kubectl get pods looks like
         NAME                                                READY   STATUS      RESTARTS        AGE
         airflow-postgresql-0                                1/1     Running     0               3h57m
         airflow-scheduler-default-0                         3/3     Running     0               3h51m
@@ -29,6 +29,7 @@ def clean_up_completed_jobs():
         """
         cmd = f"/stackable/kubectl get pods -n {TARGET_NAMESPACE} | grep Completed"
         output = subprocess.check_output(cmd, shell=True)
+        json = json.load(output)
         logging.debug(f"Cought pods from {TARGET_NAMESPACE}: {output}")
         # Output of subrocess contains leading b' from underlying data type.
         # Need to strip and split in lines per detected job
