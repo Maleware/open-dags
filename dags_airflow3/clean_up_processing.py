@@ -28,7 +28,7 @@ def clean_up_completed_jobs():
         cmd = "/stackable/kubectl get pods -n stackable-products --output=json"
         output = subprocess.check_output(cmd, shell=True)
         print(output)
-        return json.dump(output)
+        return str(output)
 
     @task
     def filter_completed_spark_jobs(pod_list: str):
