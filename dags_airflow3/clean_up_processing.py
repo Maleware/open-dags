@@ -3,6 +3,7 @@
 from airflow.sdk import dag, task
 import subprocess
 import importlib
+import sys
 
 print(sys.path)
 
