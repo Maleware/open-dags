@@ -34,7 +34,7 @@ def clean_up_completed_jobs():
     def filter_completed_spark_jobs(pod_list: [str]):
         pods = []
         for pod_details in pod_list:
-            pod_name = pod_details.split(' ')[]
+            pod_name = pod_details.split(' ')[0]
             if pod_name != '':
                 pods.append(pod_name)
         print(f'{pods}')
