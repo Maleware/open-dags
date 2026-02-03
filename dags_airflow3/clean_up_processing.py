@@ -22,18 +22,18 @@ def clean_up_completed_jobs():
     #@task.bash(output_processor=lambda output: json.loads(output))
     #@task.bash
     @task
-    def get_completed_jobs() -> str:
+    def get_completed_jobs() -> [str]:
         # return "/stackable/kubectl get pods -n stackable-products --output=json | jq -c '.items[] | select(.metadata.labels.\"app.kubernetes.io/component\" == \"spark\")'"
         # return "/stackable/kubectl get pods -n stackable-products --output=json"
         cmd = "/stackable/kubectl get pods -n stackable-products | grep Completed"
         output = subprocess.check_output(cmd, shell=True)
         print(output)
-        return str(output)
+        return str(output).split('\n')
 
     @task
-    def filter_completed_spark_jobs(pod_list: str):
-        pods = pod_list.split('\n')
-        for pod in pods:
+    def filter_completed_spark_jobs(pod_list: [str]):
+        #pods = pod_list.split("\n")
+        for pod in pod_list:
             print(f"PODS: {pod}")
         
     completed_tasks = get_completed_jobs()
