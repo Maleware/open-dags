@@ -20,8 +20,8 @@ importlib.invalidate_caches()
 def clean_up_completed_jobs():
     @task.bash(output_processor=lambda output: json.loads(output))
     def get_completed_jobs() -> str:
-        return "/stackable/kubectl get pods -n stackable-products --output=json | jq -c '.items[] | select(.metadata.labels.\"app.kubernetes.io/component\" == \"spark\")'"
-        #return "/stackable/kubectl get pods -n stackable-products --output=json output.json"
+        # return "/stackable/kubectl get pods -n stackable-products --output=json | jq -c '.items[] | select(.metadata.labels.\"app.kubernetes.io/component\" == \"spark\")'"
+        return "/stackable/kubectl get pods -n stackable-products --output=json output.json"
     @task
     def filter_completed_spark_jobs(pods_list: list):
         for pod in pods_list:
