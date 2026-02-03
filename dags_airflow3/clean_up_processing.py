@@ -26,7 +26,7 @@ def clean_up_completed_jobs():
         # return "/stackable/kubectl get pods -n stackable-products --output=json | jq -c '.items[] | select(.metadata.labels.\"app.kubernetes.io/component\" == \"spark\")'"
         # return "/stackable/kubectl get pods -n stackable-products --output=json"
         cmd = "/stackable/kubectl get pods -n stackable-products --output=json"
-        output= subprocess.check_output(cmd)
+        output= subprocess.check_output(cmd, shell=True)
         print(output)
         output
 
