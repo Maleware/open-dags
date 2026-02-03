@@ -34,7 +34,7 @@ def clean_up_completed_jobs():
                 pods.append(pod_name)
         return pods
 
-    def delete_completed_spark_jobs(pod_names: [str]):
+    def delete_jobs(pod_names: [str]):
         for name in pod_names:
             print(f"ABOUT TO DELTE {name}")
             cmd = f"/stackable/kubectl delete pod {name} -n stackable-products"
@@ -43,7 +43,7 @@ def clean_up_completed_jobs():
     @task
     def delete_completed_spark_jobs():
         pod_names = filter_spark_job_names(get_completed_jobs())
-        delete_completed_spark_jobs(pod_names)
+        delete_jobs(pod_names)
 
     delete_completed_spark_jobs()
 
