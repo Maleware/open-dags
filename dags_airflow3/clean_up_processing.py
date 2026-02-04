@@ -35,6 +35,7 @@ def clean_up_completed_jobs():
         json_string = json.loads(output)
         for pods in json_string["items"]:
             print(f"looking at {pods["metadata"]["name"]}")
+            print(f"{pods["status"]["containerStatuses"]["lastState"]["terminated"]["reason"]}")
             try:
                 if pods["status"]["containerStatuses"]["lastState"]["terminated"]["reason"] == "Completed":
                     print(f"json: {pods}")
