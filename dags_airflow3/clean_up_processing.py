@@ -34,6 +34,7 @@ def clean_up_completed_jobs():
         output = subprocess.check_output(cmd, shell=True)
         json_string = json.loads(output)
         for pods in json_string["items"]:
+            print(f"looking at {pods["metadata"]["name"]}")
             try:
                 if pods["status"]["containerStatuses"]["lastState"]["terminated"]["reason"] == "Completed":
                     print(f"json: {pods}")
