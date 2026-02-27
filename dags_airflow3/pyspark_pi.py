@@ -18,7 +18,7 @@ from stackable.spark_kubernetes_operator import SparkKubernetesOperator  # noqa:
 
 
 with DAG(
-    dag_id="sparkapp_dag_0",
+    dag_id="sparkapp_dag_1",
     schedule=None,
     start_date=datetime(2022, 1, 1),
     catchup=False,
