@@ -35,7 +35,7 @@ with DAG(
         return body_dict
 
     yaml_path = os.path.join(
-        os.environ.get("AIRFLOW__CORE__DAGS_FOLDER"), "current-0", "dags_airflow3" ,"pyspark_pi.yaml"
+        os.environ.get("AIRFLOW__CORE__DAGS_FOLDER"), "current-1", "dags_airflow3" ,"pyspark_pi.yaml"
     )
 
     with open(yaml_path, "r") as file:
