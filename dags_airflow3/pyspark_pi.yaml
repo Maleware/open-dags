@@ -11,6 +11,8 @@ spec:
   job:
     podOverrides:
       spec:
-        restartPolicy: OnFailure
+        template:
+          spec:
+            restartPolicy: OnFailure
   executor:
     replicas: 1
