@@ -4,6 +4,9 @@ kind: SparkApplication
 metadata:
   name: pyspark-pi
 spec:
+  sparkConf:
+    "spark.task.maxFailures": "3"        # retries per task (default 4)
+    "spark.stage.maxConsecutiveAttempts": "8"  # stage retry limit
   sparkImage:
     productVersion: 3.5.6
   mode: cluster
