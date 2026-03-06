@@ -8,5 +8,9 @@ spec:
     productVersion: 3.5.6
   mode: cluster
   mainApplicationFile: local:///stackable/spark/examples/src/main/python/pi.py
+  job:
+    podOverrides:
+      spec:
+        restartPolicy: OnFailure
   executor:
     replicas: 1
